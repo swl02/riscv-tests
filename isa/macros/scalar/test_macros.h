@@ -158,7 +158,8 @@ test_ ## testnum: \
       addi  x6, x30, 0; \
       addi  x4, x4, 1; \
       li  x5, 2; \
-      bne x4, x5, 1b \
+      bne x4, x5, 1b; \
+      .word 0x061cf977; \
     )
 
 #define TEST_RR_SRC12_BYPASS( testnum, src1_nops, src2_nops, inst, result, val1, val2 ) \
@@ -637,6 +638,7 @@ test_ ## testnum: \
 fail: \
         RVTEST_FAIL; \
 pass: \
+        csrwi 0xff,0x0; \
         RVTEST_PASS \
 
 
